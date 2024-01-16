@@ -1,0 +1,30 @@
+name: Build Main
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up C++ environment
+        uses: actions/setup-cpp@v1
+
+      - name: Build
+        run: |
+          g++ main.cpp -o main
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: main
+          path: main
